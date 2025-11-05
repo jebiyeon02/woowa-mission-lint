@@ -131,6 +131,11 @@ woowalint.json 파일이 생성됩니다.
 | "콘솔\_로그\_사용"             | Boolean | "콘솔\_로그\_사용": false            |
 | "상수\_스네이크\_케이스\_검사" | Boolean | "상수\_스네이크\_케이스\_검사": true |
 
+## 의존성
+
+- ESLint
+- Commander.js
+
 ## Contributors
 
 [<img src="https://avatars.githubusercontent.com/u/35906526?v%3D4" width="50" alt="2SOOY">](https://github.com/jebiyeon02)
