@@ -10,5 +10,9 @@
   },
   "repository": "https://github.com/jebiyeon02/woowa-mission-lint.git",
   "author": "jebiyeon02 <jhje5595@naver.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.2",
+    "eslint": "^9.39.1"
+  }
 }
