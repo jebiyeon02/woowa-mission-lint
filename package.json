@@ -2,6 +2,7 @@
   "name": "woowa-mission-lint",
   "version": "0.0.1",
   "main": "src/index.js",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./src/index.js",
@@ -11,6 +12,9 @@
   "repository": "https://github.com/jebiyeon02/woowa-mission-lint.git",
   "author": "jebiyeon02 <jhje5595@naver.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
   "dependencies": {
     "commander": "^14.0.2",
     "eslint": "^9.39.1"
