@@ -56,7 +56,7 @@ woowalint.json 파일이 생성됩니다.
 // woowalint.json
 
 {
-  "활성_레벨": "level_1",
+  "기본_실행_레벨": "level_1",
   "레벨별_규칙": {
     "level_1": {
       /* ... level 1 규칙 ... */
@@ -137,6 +137,7 @@ woowalint.json 파일이 생성됩니다.
 - Commander.js
 - @stylistic/eslint-plugin
 - jest
+- inquirer
 
 ## Contributors
 
