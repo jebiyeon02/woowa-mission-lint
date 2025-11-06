@@ -135,6 +135,8 @@ woowalint.json 파일이 생성됩니다.
 
 - ESLint
 - Commander.js
+- @stylistic/eslint-plugin
+- jest
 
 ## Contributors
 
