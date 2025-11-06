@@ -9,7 +9,16 @@ class RuleTranslator {
     this.#ruleNameMap = koreanToEnglishMap;
   }
 
-  translateRuleNameToEnglish(koreanRuleName) {
+  translate(koreanRule) {
+    const [ruleNameKR, ruleOptionKR] = koreanRule;
+
+    const ruleNameEslint = this.translateRuleNameToEslint(ruleNameKR);
+    const ruleOptionEslint = this.translateRuleOptionToEslint(ruleOptionKR);
+
+    return { ruleNameEslint, ruleOptionEslint };
+  }
+
+  translateRuleNameToEslint(koreanRuleName) {
     this.#isCorrectKoreanRuleName(koreanRuleName);
     return this.#ruleNameMap[koreanRuleName];
   }
@@ -20,17 +29,8 @@ class RuleTranslator {
     }
   }
 
-  translateRuleOptionToEslint(option, inverted = false) {
+  translateRuleOptionToEslint(option) {
     if (option === "off") {
-      return RULE_STATE.TURN_OFF;
-    }
-
-    // Option이 ESLint와 반대의 Boolean 설정을 가지는 경우
-    if (typeof option === "boolean" && inverted) {
-      const invertedOption = TranslatorUtils.invertBoolean(option);
-      if (invertedOption) {
-        return RULE_STATE.TURN_ON_AS_ERROR;
-      }
       return RULE_STATE.TURN_OFF;
     }
 
