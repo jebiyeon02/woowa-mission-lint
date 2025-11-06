@@ -3,7 +3,7 @@ export const RULE_MAP = {
   메서드_사이_공백: "@stylistic/lines-between-class-members",
   최대_들여쓰기_깊이: "max-depth",
   함수_최대_라인수: "max-lines-per-function",
-  삼항연산자_사용: "no-ternary",
+  삼항연산자_금지: "no-ternary",
   if문_중괄호_필수: "curly",
-  콘솔_로그_사용: "no-console",
+  콘솔_로그_금지: "no-console",
 };
