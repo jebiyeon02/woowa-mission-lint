@@ -1,6 +1,5 @@
 import { ERROR_MESSAGE } from "../constants/error-message.js";
 import { RULE_STATE } from "../constants/rule-state.js";
-import TranslatorUtils from "../utils/TranslatorUtils.js";
 
 class RuleTranslator {
   #ruleNameMap;
@@ -25,7 +24,9 @@ class RuleTranslator {
 
   #isCorrectKoreanRuleName(koreanRuleName) {
     if (!this.#ruleNameMap[koreanRuleName]) {
-      throw new Error(ERROR_MESSAGE.KOREAN_RULE_NAME_NOT_FOUND);
+      throw new Error(
+        `${ERROR_MESSAGE.KOREAN_RULE_NAME_NOT_FOUND}\n 찾은 규칙 : (${koreanRuleName})`
+      );
     }
   }
 
