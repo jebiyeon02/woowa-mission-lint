@@ -1,5 +1,6 @@
 {
   "기본_실행_레벨": "level_1",
+
   "레벨별_규칙": {
     "level_1": {
       "카멜_케이스_검사": true,
@@ -31,5 +32,15 @@
       "함수_최대_라인수": 15,
       "콘솔_로그_금지": false
     }
+  },
+
+  "프리티어_설정": {
+    "singleQuote": true,
+    "semi": true,
+    "useTabs": false,
+    "tabWidth": 2,
+    "printWidth": 80,
+    "arrowParens": "always",
+    "trailingComma": "all"
   }
 }
