@@ -4,6 +4,23 @@ import { CONFIG_CONSTANTS } from "../constants/config-constants.js";
 import { ERROR_MESSAGE } from "../constants/error-message.js";
 
 class TranslatorUtils {
+  static substringAfterChar(string, char) {
+    const indexOfChar = string.indexOf(char);
+
+    return string.substring(indexOfChar + 1);
+  }
+
+  static extractRuleOption(pluginOptionString) {
+    return TranslatorUtils.substringAfterChar(pluginOptionString, "/");
+  }
+
+  static isPluginRule(ruleName) {
+    if (ruleName.includes("@") && ruleName.includes("/")) {
+      return true;
+    }
+    return false;
+  }
+
   static readKoreanRulesFromConfig(level) {
     const configPath = TranslatorUtils.#getConfigPath();
     TranslatorUtils.#validateConfigFile(configPath);
@@ -29,10 +46,10 @@ class TranslatorUtils {
     if (!defaultLevelString) {
       throw new Error(ERROR_MESSAGE.CONFIG_DEFAULT_LEVEL_OPTION_NOT_FOUND);
     }
-    const indexOfUnderBar = defaultLevelString.indexOf(
+    const defaultLevel = TranslatorUtils.substringAfterChar(
+      defaultLevelString,
       CONFIG_CONSTANTS.DEFAULT_LEVEL_DELIMETER
     );
-    const defaultLevel = defaultLevelString.substring(indexOfUnderBar + 1);
 
     return defaultLevel;
   }
