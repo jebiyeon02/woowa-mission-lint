@@ -1,7 +1,7 @@
-import path from "path";
-import fs from "fs";
-import { CONFIG_CONSTANTS } from "../constants/config-constants.js";
-import { ERROR_MESSAGE } from "../constants/error-message.js";
+import path from 'path';
+import fs from 'fs';
+import { CONFIG_CONSTANTS } from '../constants/config-constants.js';
+import { ERROR_MESSAGE } from '../constants/error-message.js';
 
 class TranslatorUtils {
   static substringAfterChar(string, char) {
@@ -11,11 +11,11 @@ class TranslatorUtils {
   }
 
   static extractRuleOption(pluginOptionString) {
-    return TranslatorUtils.substringAfterChar(pluginOptionString, "/");
+    return TranslatorUtils.substringAfterChar(pluginOptionString, '/');
   }
 
   static isPluginRule(ruleName) {
-    if (ruleName.includes("@") && ruleName.includes("/")) {
+    if (ruleName.includes('@') && ruleName.includes('/')) {
       return true;
     }
     return false;
@@ -48,7 +48,7 @@ class TranslatorUtils {
     }
     const defaultLevel = TranslatorUtils.substringAfterChar(
       defaultLevelString,
-      CONFIG_CONSTANTS.DEFAULT_LEVEL_DELIMETER
+      CONFIG_CONSTANTS.DEFAULT_LEVEL_DELIMETER,
     );
 
     return defaultLevel;
@@ -66,7 +66,7 @@ class TranslatorUtils {
 
     const configPath = path.resolve(
       projectRootPath,
-      CONFIG_CONSTANTS.CONFIG_FILE_NAME
+      CONFIG_CONSTANTS.CONFIG_FILE_NAME,
     );
 
     return configPath;
