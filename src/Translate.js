@@ -1,7 +1,9 @@
 import RuleTranslator from "./ruleTranslator.js";
 import { RULE_MAP } from "../constants/rule-map.js";
 import { ESLint } from "eslint";
+import TranslatorUtils from "../utils/TranslatorUtils.js";
 
+// 실제로 번역을 실시하는 클래스
 class Translate {
   async runLint(koreanRules) {
     console.log("검증을 시작합니다.");
@@ -45,8 +47,11 @@ class Translate {
     const englishRules = {};
 
     Object.entries(koreanRules).forEach((koreanRule) => {
-      const { ruleNameEslint, ruleOptionEslint } =
+      let { ruleNameEslint, ruleOptionEslint } =
         translator.translate(koreanRule);
+      if (TranslatorUtils.isPluginRule(ruleNameEslint)) {
+        ruleNameEslint = TranslatorUtils.extractRuleOption(ruleNameEslint);
+      }
       englishRules[ruleNameEslint] = ruleOptionEslint;
     });
 
