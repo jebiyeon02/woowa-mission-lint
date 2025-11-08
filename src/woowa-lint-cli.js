@@ -4,18 +4,20 @@ import fs from "fs";
 import { Command } from "commander";
 import inquirer from "inquirer";
 import woowalintTemplateJsonFile from "./woowalint.template.json" with {type:"json"};
+import TranslatorUtils from '../utils/TranslatorUtils.js';
+import Translate from './Translate.js';
 
 // 메타데이터 설정
 const program = new Command();
 program
   .name("woowa-lint")
-  .version("0.0.1")
-  .description("우테코 린터 초기 설정");
+  .version("0.0.2")
+  .description("우테코 린터 실행 및 초기 설정");
 
 // 명령어 정의
 program
-  .command("init")
   .description("woowalint.json 파일을 생성합니다.")
+  .command("init")
   .action(async () => {
     // 파일명 정의
     const fileName = "woowalint.json";
@@ -43,5 +45,36 @@ program
     fs.writeFileSync(fileName, content);
     console.log("설정 파일이 생성되었습니다.");
   });
-  
+
+program
+  .description("기본 실행 레벨로 우테코 린터를 실행합니다.")
+  .action(async () => {
+
+    const defaultLevel = TranslatorUtils.getDefaultLevelFromConfig();
+    const koreanRules = TranslatorUtils.readKoreanRulesFromConfig(defaultLevel);
+    const translate = new Translate();
+    translate.runLint(koreanRules);
+
+  })
+
+program
+  .description("지정한 레벨로 우테코 린터를 실행합니다.")
+  .option("--level <level>", "실행할 규칙 레벨 (예 : 1,2,3)")
+  .action(async (options) => {
+    const {level} = options;
+    let runLintLevel = level;
+
+    // woowa-lint만 실행했을 때 기본 실행 레벨로 실행
+    if(level===undefined){
+      const defaultLevel = TranslatorUtils.getDefaultLevelFromConfig();
+      runLintLevel = defaultLevel;
+    }
+
+    console.log(`검증 레벨 : ${runLintLevel}`)
+    const koreanRules = TranslatorUtils.readKoreanRulesFromConfig(runLintLevel);
+    const translate = new Translate();
+    translate.runLint(koreanRules);
+
+  })
+
 program.parse(process.argv);
