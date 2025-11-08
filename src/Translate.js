@@ -2,6 +2,8 @@ import RuleTranslator from './ruleTranslator.js';
 import { RULE_MAP } from '../constants/rule-map.js';
 import { ESLint } from 'eslint';
 import TranslatorUtils from '../utils/TranslatorUtils.js';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginPrettier from 'eslint-plugin-prettier';
 
 // 실제로 번역을 실시하는 클래스
 class Translate {
@@ -15,20 +17,22 @@ class Translate {
       overrideConfig: [
         {
           files: ['**/*.js'],
-          extends: ['prettier'],
           languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
           // 가상 플러그인으로 커스텀 룰을 주입
-          // plugins: {
-          //   local: {
-          //     rules: {
-          //       "no-console-log": noConsoleLogRule,
-          //     },
-          //   },
-          // },
+          plugins: {
+            prettier: eslintPluginPrettier,
+            // local: {
+            //   rules: {
+            //     "no-console-log": noConsoleLogRule,
+            //   },
+            // },
+          },
           rules: {
             ...eslintRules,
+            'prettier/prettier': 'error',
           },
         },
+        eslintConfigPrettier,
       ],
     });
 
