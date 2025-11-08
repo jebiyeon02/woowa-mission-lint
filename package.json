@@ -25,6 +25,8 @@
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.5.0",
-    "jest": "^30.2.0"
+    "eslint-config-prettier": "^10.1.8",
+    "jest": "^30.2.0",
+    "prettier": "^3.6.2"
   }
 }
