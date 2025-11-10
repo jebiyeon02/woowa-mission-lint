@@ -12,7 +12,8 @@ class RuleTranslator {
     const [ruleNameKR, ruleOptionKR] = koreanRule;
 
     const ruleNameEslint = this.translateRuleNameToEslint(ruleNameKR);
-    const ruleOptionEslint = this.translateRuleOptionToEslint(ruleOptionKR);
+    let ruleOptionEslint = this.translateRuleOptionToEslint(ruleOptionKR);
+    ruleOptionEslint = this.#addOptions(ruleNameEslint, ruleOptionEslint);
 
     return { ruleNameEslint, ruleOptionEslint };
   }
@@ -57,6 +58,23 @@ class RuleTranslator {
     }
 
     return option;
+  }
+
+  // 옵션이 필요한 규칙들을 처리하는 메서드
+  #addOptions(ruleNameEslint, ruleOptionEslint) {
+    if (
+      ruleNameEslint === '@stylistic/lines-between-class-members' &&
+      ruleOptionEslint === RULE_STATE.TURN_ON_AS_ERROR
+    ) {
+      // 한줄짜리 멤버는 예외적으로 검사하지 않는 옵션 추가 -> 필드를 제외하기 위함
+      return [
+        RULE_STATE.TURN_ON_AS_ERROR,
+        RULE_STATE.OPTION.AlWAYS,
+        { exceptAfterSingleLine: true },
+      ];
+    }
+
+    return ruleOptionEslint;
   }
 }
 
