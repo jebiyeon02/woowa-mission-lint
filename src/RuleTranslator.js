@@ -44,8 +44,16 @@ class RuleTranslator {
     }
 
     // Option이 숫자인 경우
-    if (!isNaN(option)) {
+    if (typeof option === 'number') {
       return [RULE_STATE.TURN_ON_AS_ERROR, option];
+    }
+
+    if (typeof option === 'object') {
+      // 나중에 다른 규칙들도 property를 가지게 만들 수도 있기 때문에
+      // 확장성을 위해 객체 검사를 분리해둠
+      if (Object.keys(option).includes('적용_폴더')) {
+        return option;
+      }
     }
 
     return option;
