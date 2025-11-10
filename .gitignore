@@ -1,1 +1,6 @@
 node_modules
+
+devlog/
+.prettierrc.json
+target-code.js
+woowalint.json
