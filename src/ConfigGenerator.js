@@ -5,6 +5,7 @@ import RuleTranslator from './ruleTranslator.js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 import TranslatorUtils from '../utils/TranslatorUtils.js';
+import lowerCamelCaseRule from '../rules/lowerCamelCaseRule.js';
 
 class ConfigGenerator {
   #koreanRules;
@@ -30,6 +31,11 @@ class ConfigGenerator {
         languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
         plugins: {
           prettier: eslintPluginPrettier,
+          woowa: {
+            rules: {
+              camelCase: lowerCamelCaseRule,
+            },
+          },
         },
         rules: {
           ...generalRules,
@@ -55,7 +61,6 @@ class ConfigGenerator {
         },
         rules: {
           ...specificFolderRules,
-          camelcase: 'off',
           'prettier/prettier': 'error',
         },
       });
