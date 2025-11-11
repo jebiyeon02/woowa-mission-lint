@@ -1,6 +1,9 @@
 import { ESLint } from 'eslint';
 
 import ConfigGenerator from './ConfigGenerator.js';
+import { ESLINT_ERROR_TRANSLATION_MAP } from '../constants/eslint-error-translation-map.js';
+import ErrorMessageTranslator from './eslint/ErrorMessageTranslator.js';
+import TranslatorUtils from '../utils/TranslatorUtils.js';
 
 // 실제로 번역을 실시하는 클래스
 
@@ -19,6 +22,31 @@ class Translate {
 
     // 파일 검사
     const results = await eslint.lintFiles(['.']);
+    const errorMessageTranslator = new ErrorMessageTranslator(
+      ESLINT_ERROR_TRANSLATION_MAP,
+    );
+    // 에러 메세지를 한국어로 번역하는 과정
+    results.forEach((result) => {
+      if (result.messages.length > 0) {
+        result.messages.forEach((message) => {
+          let koreanMessage = errorMessageTranslator.getKoreanMessage(message);
+          // 이부분 메서드로 분리하자 나중에
+          if (
+            message.ruleId === 'max-depth' ||
+            message.ruleId === 'max-lines-per-function'
+          ) {
+            const variables =
+              TranslatorUtils.extractVariablesFromMessage(message);
+            koreanMessage = TranslatorUtils.replaceMessageWithArray(
+              koreanMessage,
+              'WOOWA_VARIABLE',
+              variables,
+            );
+          }
+          message.message = koreanMessage;
+        });
+      }
+    });
 
     // 에러 가독성 좋게 출력해주기
     const formatter = await eslint.loadFormatter('stylish');
