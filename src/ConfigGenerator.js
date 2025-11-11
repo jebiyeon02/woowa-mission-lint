@@ -24,6 +24,7 @@ class ConfigGenerator {
       this.#separateEslintRules(eslintRules);
 
     const finalOverrideConfig = [
+      eslintConfigPrettier,
       // 전체 파일에 다 적용되는 일반 설정들
       {
         files: ['**/*.js'],
@@ -43,7 +44,6 @@ class ConfigGenerator {
         },
       },
       // 나중에 확장하게 된다면, config를 더 많이 만들어야 할 수도 있다. 이 점 기억해두자
-      eslintConfigPrettier,
     ];
     // 특정 폴더 전용 설정들 (특정 폴더 옵션이 있는 경우에만 생성함)
     if (specificFolders.length > 0) {
