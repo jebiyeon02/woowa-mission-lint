@@ -41,12 +41,12 @@
   },
 
   "프리티어_설정": {
-    "singleQuote": true,
-    "semi": true,
-    "useTabs": false,
-    "tabWidth": 2,
-    "printWidth": 80,
-    "arrowParens": "always",
-    "trailingComma": "all"
+    "홑따옴표_사용": true,
+    "세미콜론_사용": true,
+    "탭_사용": false,
+    "탭_너비": 2,
+    "한_줄당_최대_글자수": 80,
+    "화살표_함수_괄호": "always",
+    "후행_콤마": "all"
   }
 }
