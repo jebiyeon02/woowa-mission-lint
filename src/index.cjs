@@ -1,6 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const { CONFIG_CONSTANTS } = require('../constants/config-constants.js');
+const { default: PrettierTranslator } = require('./PrettierTranslator.js');
+const { PRETTIER_MAP } = require('../constants/prettier-map.js');
 
 const projectRootPath = process.cwd();
 const configPath = path.resolve(
@@ -27,5 +29,7 @@ try {
   }
   console.error(error.message);
 }
+const prettierTranslator = new PrettierTranslator(PRETTIER_MAP);
+prettierRule = prettierTranslator.translateAllRules(prettierRule);
 
 module.exports = prettierRule;

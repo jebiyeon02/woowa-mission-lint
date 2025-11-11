@@ -1,6 +1,8 @@
 import path from 'path';
 import fs from 'fs';
 import { CONFIG_CONSTANTS } from '../constants/config-constants.js';
+import PrettierTranslator from './PrettierTranslator.js';
+import { PRETTIER_MAP } from '../constants/prettier-map.js';
 
 const projectRootPath = process.cwd();
 const configPath = path.resolve(
@@ -27,5 +29,8 @@ try {
   }
   console.error(error.message);
 }
+
+const prettierTranslator = new PrettierTranslator(PRETTIER_MAP);
+prettierRule = prettierTranslator.translateAllRules(prettierRule);
 
 export default prettierRule;
