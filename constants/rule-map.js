@@ -6,5 +6,5 @@ export const RULE_MAP = {
   함수_최대_라인수: 'max-lines-per-function',
   삼항연산자_금지: 'no-ternary',
   if문_중괄호_필수: 'curly',
-  콘솔_로그_금지: 'no-console',
+  콘솔_객체_금지: 'no-console',
 };
