@@ -3,6 +3,7 @@ export const CONFIG_CONSTANTS = {
   OPTION_NAME: {
     EACH_LEVEL_RULE: '레벨별_규칙',
     DEFAULT_RUN_LEVEL: '기본_실행_레벨',
+    EXCEPT_FOLDER: '검사_제외_폴더',
   },
   DEFAULT_LEVEL_DELIMETER: '_',
   INIT_COMMAND: 'woowa-lint init',
