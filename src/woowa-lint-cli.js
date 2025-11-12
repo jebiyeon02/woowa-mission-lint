@@ -69,8 +69,9 @@ program
       runLintLevel = defaultLevel;
     }
 
-    let startMessage = chalk.bold.cyan('\n🔍 Woowa Linter 검증 시작 - ');
-    startMessage += `(레벨 ${runLintLevel})`;
+    const levelString = chalk.yellow(runLintLevel);
+    let startMessage = chalk.bold.cyan(`\n🔍 Woowa Linter 검증 시작`);
+    startMessage += chalk.dim(` (레벨 ${levelString})`);
     console.log(startMessage);
     const koreanRules = TranslatorUtils.readKoreanRulesFromConfig(runLintLevel);
     const translate = new Translate();
