@@ -6,6 +6,7 @@ import inquirer from 'inquirer';
 import woowalintTemplateJsonFile from './woowalint.template.json' with { type: 'json' };
 import TranslatorUtils from '../utils/TranslatorUtils.js';
 import Translate from './Translate.js';
+import chalk from 'chalk';
 
 // 메타데이터 설정
 const program = new Command();
@@ -68,7 +69,9 @@ program
       runLintLevel = defaultLevel;
     }
 
-    console.log(`검증 레벨 : ${runLintLevel}`);
+    let startMessage = chalk.bold.cyan('\n🔍 Woowa Linter 검증 시작 - ');
+    startMessage += `(레벨 ${runLintLevel})`;
+    console.log(startMessage);
     const koreanRules = TranslatorUtils.readKoreanRulesFromConfig(runLintLevel);
     const translate = new Translate();
     translate.runLint(koreanRules);
