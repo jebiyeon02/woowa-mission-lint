@@ -14,13 +14,12 @@ export const ESLINT_ERROR_TRANSLATION_MAP = {
   'max-depth': [
     {
       tooDeeply:
-        '들여쓰기 깊이가 WOOWA_VARIABLE(으)로 너무 깊습니다. 최대 허용 깊이는 WOOWA_VARIABLE줄입니다.',
+        '현재 들여쓰기 깊이가 WOOWA_VARIABLE입니다. 최대 깊이는 WOOWA_VARIABLE입니다.',
     },
   ],
   curly: [
     {
-      missingCurlyAfterCondition:
-        '제어문 다음에는 중괄호를 꼭 작성해야 합니다.',
+      missingCurlyAfterCondition: '제어문 다음에는 중괄호를 작성해야 합니다.',
     },
   ],
 };
