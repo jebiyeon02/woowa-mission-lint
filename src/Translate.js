@@ -4,13 +4,12 @@ import ConfigGenerator from './ConfigGenerator.js';
 import { ESLINT_ERROR_TRANSLATION_MAP } from '../constants/eslint-error-translation-map.js';
 import ErrorMessageTranslator from './eslint/ErrorMessageTranslator.js';
 import TranslatorUtils from '../utils/TranslatorUtils.js';
+import { formatWoowaLint } from './formatters/WoowaFormatter.js';
 
 // 실제로 번역을 실시하는 클래스
 
 class Translate {
   async runLint(koreanRules) {
-    console.log('검증을 시작합니다.');
-
     const configGenerator = new ConfigGenerator(koreanRules);
     const overrideConfig = configGenerator.generateConfig();
 
@@ -48,13 +47,16 @@ class Translate {
       }
     });
 
-    // 에러 가독성 좋게 출력해주기
-    const formatter = await eslint.loadFormatter('stylish');
-    console.log(formatter.format(results));
+    // ESLint 내장 포맷터 사용 버전
+    // const formatter = await eslint.loadFormatter('stylish');
+    // console.log(formatter.format(results));
 
-    // 에러가 있으면 종료코드 1
-    process.exitCode = results.some((r) => r.errorCount > 0) ? 1 : 0;
-    console.log('검증 완료!');
+    // 커스텀 포맷터 적용
+    const output = formatWoowaLint(results);
+    console.log(output);
+
+    const hasError = results.some((r) => r.errorCount > 0);
+    process.exitCode = hasError ? 1 : 0;
   }
 }
 
