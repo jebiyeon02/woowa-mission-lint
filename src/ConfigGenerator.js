@@ -6,6 +6,8 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 import TranslatorUtils from '../utils/TranslatorUtils.js';
 import lowerCamelCaseRule from '../rules/lowerCamelCaseRule.js';
+import ConfigReader from './ConfigReader.js';
+import { CONFIG_CONSTANTS } from '../constants/config-constants.js';
 
 class ConfigGenerator {
   #koreanRules;
@@ -23,12 +25,17 @@ class ConfigGenerator {
     const { generalRules, specificFolderRules } =
       this.#separateEslintRules(eslintRules);
 
+    const configReader = new ConfigReader();
+    const exceptFolders = configReader.getOptionContents(
+      CONFIG_CONSTANTS.OPTION_NAME.EXCEPT_FOLDER,
+    );
+
     const finalOverrideConfig = [
       eslintConfigPrettier,
       // 전체 파일에 다 적용되는 일반 설정들
       {
         files: ['**/*.js'],
-        ignores: specificFolders,
+        ignores: [...specificFolders, ...exceptFolders],
         languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
         plugins: {
           prettier: eslintPluginPrettier,
@@ -50,6 +57,7 @@ class ConfigGenerator {
       finalOverrideConfig.unshift({
         // (prettier-config 앞으로 끼워넣기)
         files: specificFolders,
+        ignores: [...exceptFolders],
         languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
         plugins: {
           prettier: eslintPluginPrettier,
