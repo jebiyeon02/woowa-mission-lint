@@ -143,6 +143,7 @@ _모든 규칙은 "off" 또는 false 옵션을 주어 비활성화 할 수 있�
 - prettier
 - eslint-config-prettier -> ESLint와의 호환성 ( 규칙 중복 검사 안하도록)
 - eslint-plugin-prettier -> Prettier오류를 ESLint 오류로 같이 띄움
+- chalk (CLI에 색상 입히기)
 
 ## Contributors
 
