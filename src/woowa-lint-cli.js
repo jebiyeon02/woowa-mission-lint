@@ -78,7 +78,10 @@ program
     packageJsonContent['prettier'] = 'woowa-mission-lint';
 
     try {
-      fs.writeFileSync(packageJsonPath, JSON.stringify(packageJsonContent,null,2));
+      fs.writeFileSync(
+        packageJsonPath,
+        JSON.stringify(packageJsonContent, null, 2),
+      );
       console.log('프리티어 실행 설정이 적용 되었습니다.');
     } catch (err) {
       console.error(
