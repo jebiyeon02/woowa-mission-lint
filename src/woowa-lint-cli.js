@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
+import path from 'path';
 import { Command } from 'commander';
 import inquirer from 'inquirer';
 import woowalintTemplateJsonFile from './woowalint.template.json' with { type: 'json' };
@@ -17,7 +18,9 @@ program
 
 // 명령어 정의
 program
-  .description('woowalint.json 파일을 생성합니다.')
+  .description(
+    'woowalint.json 파일을 생성하고, package.json에 prettier설정을 추가합니다.',
+  )
   .command('init')
   .action(async () => {
     // 파일명 정의
@@ -45,6 +48,44 @@ program
 
     fs.writeFileSync(fileName, content);
     console.log('설정 파일이 생성되었습니다.');
+
+    // 사용자의 package.json에 "prettier": "woowa-mission-lint"설정 추가
+
+    const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+    if (!fs.existsSync(packageJsonPath)) {
+      throw new Error(
+        '[ERROR]: package.json파일이 존재하지 않습니다. 생성 후 다시 시도 해주세요',
+      );
+    }
+    const packageJsonContent = JSON.parse(fs.readFileSync(packageJsonPath));
+    if (packageJsonContent['prettier']) {
+      const { overwrite } = await inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'overwrite',
+          message:
+            'package.json에 prettier 설정이 이미 존재합니다. 덮어쓰시겠습니까?',
+          default: false,
+        },
+      ]);
+
+      if (!overwrite) {
+        console.log('작업이 취소되었습니다.');
+        process.exit(0);
+      }
+    }
+
+    packageJsonContent['prettier'] = 'woowa-mission-lint';
+
+    try {
+      fs.writeFileSync(packageJsonPath, JSON.stringify(packageJsonContent,null,2));
+      console.log('프리티어 실행 설정이 적용 되었습니다.');
+    } catch (err) {
+      console.error(
+        '프리티어 실행 설정 적용에 실패했습니다. (package.json 파일 쓰기 오류)',
+        err,
+      );
+    }
   });
 
 program
