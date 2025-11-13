@@ -23,7 +23,7 @@ ESLint와 Prettier를 각각 설치하고, 여러개의 설정파일을 만들�
 1. 모듈 다운로드
 
 ```sh
-   npm i woowa-mission-lint
+npm i woowa-mission-lint
 ```
 
 _프로젝트에서 ESLint와 Prettier를 사용중이라면 충돌 방지를 위해 미리 삭제하는 것을 권장합니다_
@@ -36,7 +36,7 @@ _프로젝트에서 ESLint와 Prettier를 사용중이라면 충돌 방지를 �
 `package.json`에 `"prettier": "woowa-mission-lint"` 설정이 추가됩니다.
 
 ```sh
-    npx woowa-lint init
+npx woowa-lint init
 ```
 
 <br>
