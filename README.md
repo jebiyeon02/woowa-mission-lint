@@ -1,3 +1,5 @@
+[![npm version](https://img.shields.io/npm/v/woowa-mission-lint?style=flat&color=blue)](https://www.npmjs.com/package/woowa-mission-lint)
+
 # woowa-mission-lint
 
 `woowa-mission-lint`는 우아한 테크코스 프리코스 미션 진행을 돕는 ESlint/Prettier 통합 검증 라이브러리 입니다.
