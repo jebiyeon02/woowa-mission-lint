@@ -13,7 +13,7 @@ import chalk from 'chalk';
 const program = new Command();
 program
   .name('woowa-lint')
-  .version('0.0.2')
+  .version('0.0.6')
   .description('우테코 린터 실행 및 초기 설정');
 
 // 명령어 정의
