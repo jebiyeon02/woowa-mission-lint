@@ -9,4 +9,6 @@ export const CONFIG_CONSTANTS = {
   INIT_COMMAND: 'woowa-lint init',
   CAPITAL_SNAKE_CASE_REGEX: '^[A-Z]+(_[A-Z]+)*$',
   LOWER_CAMEL_CASE_REGEX: '^[a-z][a-zA-Z0-9]*$',
+
+  ERROR_TAG: '[ERROR]',
 };
