@@ -7,22 +7,22 @@ class ConfigReader {
   #configFileContent;
 
   constructor() {
-    const projectRootPath = process.cwd();
-    const configPath = path.resolve(
-      projectRootPath,
-      CONFIG_CONSTANTS.CONFIG_FILE_NAME,
-    );
+    const configPath = this.#getConfigPath();
     this.#configFileContent = this.#getConfigFileContent(configPath);
   }
 
-  getOptionContents(option) {
-    this.#validateOption(option);
+  getOptionContents(parent = 'root', option) {
+    if (parent === 'root') {
+      this.#validateOption(this.#configFileContent, option);
+      return this.#configFileContent[option];
+    }
 
-    return this.#configFileContent[option];
+    this.#validateOption(parent, option);
+    return parent[option];
   }
 
-  #validateOption(option) {
-    if (!this.#configFileContent[option]) {
+  #validateOption(parent, option) {
+    if (!parent[option]) {
       throw new Error(`[ERROR]: ${option} 설정을 찾을 수 없습니다.`);
     }
   }
@@ -40,6 +40,17 @@ class ConfigReader {
     }
 
     return undefined;
+  }
+
+  #getConfigPath() {
+    const projectRootPath = process.cwd();
+
+    const configPath = path.resolve(
+      projectRootPath,
+      CONFIG_CONSTANTS.CONFIG_FILE_NAME,
+    );
+
+    return configPath;
   }
 }
 
