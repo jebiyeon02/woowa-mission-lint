@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from '../constants/error-message.js';
+
 class PrettierTranslator {
   #prettierMap;
 
@@ -23,14 +25,10 @@ class PrettierTranslator {
 
   #validatePrettierRule(koreanRuleName) {
     if (koreanRuleName.includes(' ')) {
-      throw new Error(
-        `[ERROR]: 규칙에 공백이 포함되어 있습니다. (${koreanRuleName})`,
-      );
+      throw new Error(`${ERROR_MESSAGE.INCLUDE_BLANK} (${koreanRuleName})`);
     }
     if (!this.#prettierMap[koreanRuleName]) {
-      throw new Error(
-        `[ERROR]: 일치하는 규칙을 찾지 못했습니다. (${koreanRuleName})`,
-      );
+      throw new Error(`${ERROR_MESSAGE.RULE_NOT_FOUND} (${koreanRuleName})`);
     }
   }
 }
