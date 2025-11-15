@@ -1,3 +1,6 @@
+import { ERROR_MESSAGE } from '../constants/error-message.js';
+import ErrorHandler from './ErrorHandler.js';
+
 class ErrorMessageTranslator {
   #errorMap;
 
@@ -16,8 +19,8 @@ class ErrorMessageTranslator {
         return foundOption[message.messageId];
       }
 
-      throw new Error(
-        `[ERROR] 일치하는 옵션이 존재하지 않습니다 (${message.ruleId})`,
+      ErrorHandler.createError(
+        `${ERROR_MESSAGE.ESLINT_RULE_ID_NOT_FOUND} (${message.ruleId})`,
       );
     }
 

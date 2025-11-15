@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { CONFIG_CONSTANTS } from '../constants/config-constants.js';
 import { ERROR_MESSAGE } from '../constants/error-message.js';
+import ErrorHandler from './ErrorHandler.js';
 
 class ConfigReader {
   #configFileContent;
@@ -23,7 +24,9 @@ class ConfigReader {
 
   #validateOption(parent, option) {
     if (!parent[option]) {
-      throw new Error(`[ERROR]: ${option} 설정을 찾을 수 없습니다.`);
+      ErrorHandler.createError(
+        `${ERROR_MESSAGE.CONFIG_OPTION_NOT_FOUND} (${option})`,
+      );
     }
   }
 
@@ -33,8 +36,7 @@ class ConfigReader {
       return configFileContent;
     } catch (error) {
       if (error.code === 'ENOENT') {
-        console.error(ERROR_MESSAGE.CONFIG_FILE_NOT_FOUND);
-        process.exit(1);
+        ErrorHandler.createError(ERROR_MESSAGE.CONFIG_FILE_NOT_FOUND);
       }
       console.error(error.message);
     }
