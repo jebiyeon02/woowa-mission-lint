@@ -2,7 +2,7 @@ import { ESLint } from 'eslint';
 
 import ConfigGenerator from './ConfigGenerator.js';
 import { ESLINT_ERROR_TRANSLATION_MAP } from '../constants/eslint-error-translation-map.js';
-import ErrorMessageTranslator from './eslint/ErrorMessageTranslator.js';
+import ErrorMessageTranslator from './ErrorMessageTranslator.js';
 import TranslatorUtils from '../utils/TranslatorUtils.js';
 import { formatWoowaLint } from './formatters/WoowaFormatter.js';
 
