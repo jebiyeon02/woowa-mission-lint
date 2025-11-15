@@ -27,6 +27,7 @@ class ConfigGenerator {
 
     const configReader = new ConfigReader();
     const exceptFolders = configReader.getOptionContents(
+      'root',
       CONFIG_CONSTANTS.OPTION_NAME.EXCEPT_FOLDER,
     );
 
