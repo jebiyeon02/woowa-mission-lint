@@ -1,7 +1,7 @@
 import { ERROR_MESSAGE } from '../constants/error-message.js';
 import { RULE_MAP } from '../constants/rule-map.js';
 import { RULE_STATE } from '../constants/rule-state.js';
-import RuleTranslator from '../src/ruleTranslator.js';
+import RuleTranslator from '../src/RuleTranslator.js';
 
 describe('번역기 클래스 테스트', () => {
   test('규칙 이름 번역 기능 테스트', () => {

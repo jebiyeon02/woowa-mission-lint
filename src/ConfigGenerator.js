@@ -1,7 +1,7 @@
 import { RULE_MAP } from '../constants/rule-map.js';
 import { RULE_STATE } from '../constants/rule-state.js';
 import constantSnakeCaseRule from '../rules/constantSnakeCaseRule.js';
-import RuleTranslator from './ruleTranslator.js';
+import RuleTranslator from './RuleTranslator.js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
 import TranslatorUtils from '../utils/TranslatorUtils.js';
