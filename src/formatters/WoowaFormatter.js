@@ -44,9 +44,6 @@ export function formatWoowaLint(results) {
     0,
   );
 
-  output += chalk.red(`✖ 오류 ${totalErrors}개 `);
-  output += chalk.yellow(`⚠️ 경고 ${totalWarnings}개 `);
-  output += chalk.blue(`🗂  검증 파일 ${checkFileCount}개\n\n`);
   if (totalErrors > 0) {
     output += errorDetails;
     // 오류 가장 많은 파일 output 넣기
@@ -64,6 +61,10 @@ export function formatWoowaLint(results) {
   } else {
     output += chalk.bold.green('✅ 문제가 발견되지 않았습니다!');
   }
+
+  output += chalk.red(`✖ 오류 ${totalErrors}개 `);
+  output += chalk.yellow(`⚠️ 경고 ${totalWarnings}개 `);
+  output += chalk.blue(`🗂  검증 파일 ${checkFileCount}개\n\n`);
 
   return chalk.reset(output);
 }
