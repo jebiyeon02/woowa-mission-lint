@@ -96,34 +96,38 @@ program
   .description('지정한 레벨로 우테코 린터를 실행합니다.')
   .option('--level <level>', '실행할 규칙 레벨 (예 : 1,2,3)')
   .action(async (options) => {
-    const { level } = options;
-    let runLintLevel = level;
-    const configReader = new ConfigReader();
+    try {
+      const { level } = options;
+      let runLintLevel = level;
+      const configReader = new ConfigReader();
 
-    // woowa-lint만 실행했을 때 기본 실행 레벨로 실행
-    if (level === undefined) {
-      const defaultLevel = configReader.getOptionContents(
+      // woowa-lint만 실행했을 때 기본 실행 레벨로 실행
+      if (level === undefined) {
+        const defaultLevel = configReader.getOptionContents(
+          'root',
+          '기본_실행_레벨',
+        );
+        runLintLevel = TranslatorUtils.substringAfterChar(defaultLevel, '_');
+      }
+
+      const levelString = chalk.yellow(runLintLevel);
+      let startMessage = chalk.bold.cyan(`\n🔍 Woowa Linter 검증 시작`);
+      startMessage += chalk.dim(` (레벨 ${levelString})`);
+      console.log(startMessage);
+
+      const allKoreanRules = configReader.getOptionContents(
         'root',
-        '기본_실행_레벨',
+        '레벨별_규칙',
       );
-      runLintLevel = TranslatorUtils.substringAfterChar(defaultLevel, '_');
+      const koreanRules = configReader.getOptionContents(
+        allKoreanRules,
+        TranslatorUtils.addLevelPrefix(runLintLevel),
+      );
+      const translate = new Translate();
+      await translate.runLint(koreanRules);
+    } catch (error) {
+      console.log(chalk.yellow(error.message));
     }
-
-    const levelString = chalk.yellow(runLintLevel);
-    let startMessage = chalk.bold.cyan(`\n🔍 Woowa Linter 검증 시작`);
-    startMessage += chalk.dim(` (레벨 ${levelString})`);
-    console.log(startMessage);
-
-    const allKoreanRules = configReader.getOptionContents(
-      'root',
-      '레벨별_규칙',
-    );
-    const koreanRules = configReader.getOptionContents(
-      allKoreanRules,
-      TranslatorUtils.addLevelPrefix(runLintLevel),
-    );
-    const translate = new Translate();
-    translate.runLint(koreanRules);
   });
 
 program.parse(process.argv);
