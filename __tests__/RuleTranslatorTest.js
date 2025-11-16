@@ -7,7 +7,7 @@ describe('번역기 클래스 테스트', () => {
   test('규칙 이름 번역 기능 테스트', () => {
     // given
     const koreanRule = '카멜_케이스_검사';
-    const eslintRule = 'camelcase';
+    const eslintRule = 'woowa/camelCase';
 
     // when
     const ruleTranslator = new RuleTranslator(RULE_MAP);
@@ -48,4 +48,19 @@ describe('번역기 클래스 테스트', () => {
       );
     },
   );
+
+  test('통합 번역 기능 테스트', () => {
+    // given
+    const koreanRule = ['카멜_케이스_검사', true];
+    const eslintRule = {
+      ruleNameEslint: 'woowa/camelCase',
+      ruleOptionEslint: 2,
+    };
+
+    // when
+    const ruleTranslator = new RuleTranslator(RULE_MAP);
+
+    // then
+    expect(ruleTranslator.translate(koreanRule)).toEqual(eslintRule);
+  });
 });
