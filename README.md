@@ -54,32 +54,36 @@ npx woowa-lint
 4. 레벨 옵션과 함께 사용하기
 
 선택한 레벨의 규칙으로 요구사항을 검증합니다.
-   - 레벨 1
 
-   ```sh
-   npx woowa-lint --level 1
-   ```
+- 레벨 1
 
-   - 레벨 2
+```sh
+npx woowa-lint --level 1
+```
 
-   ```sh
-   npx woowa-lint --level 2
-   ```
+- 레벨 2
 
-   - 레벨 3
+```sh
+npx woowa-lint --level 2
+```
 
-   ```sh
-   npx woowa-lint --level 3
-   ```
+- 레벨 3
 
-   3개의 기본 레벨은 [여기서](#-3-기본-레벨-레벨-13) 확인해주세요
+```sh
+npx woowa-lint --level 3
+```
+
+3개의 기본 레벨은 [여기서](#-3-기본-레벨-레벨-13) 확인해주세요
 <br><br>
 
 #### ESLint & Prettier 내장 명령어
+
 _(내장 명령어 없이 사용할 수 있도록 발전시키겠습니다)_ 😂
+
 ```sh
 npx prettier --write .
 ```
+
 현재 프로젝트에 프리티어를 일괄 적용합니다.
 
 ## 설정 파일 다루기
@@ -136,7 +140,7 @@ _기본값은 Jest의 테스트 폴더와 node_modules입니다_
 #### 예시
 
 ```js
-"level_4": {/* ... 사용자 정의 규칙 ... */}
+"level_레벨명": {/* ... 사용자 정의 규칙 ... */}
 ```
 
 <br>
