@@ -14,7 +14,7 @@ import ConfigReader from './ConfigReader.js';
 const program = new Command();
 program
   .name('woowa-lint')
-  .version('0.0.6')
+  .version('0.0.7')
   .description('우테코 린터 실행 및 초기 설정');
 
 // 명령어 정의
