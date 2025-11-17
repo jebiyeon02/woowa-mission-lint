@@ -9,17 +9,6 @@ class TranslatorUtils {
     return string.substring(indexOfChar + 1);
   }
 
-  static extractRuleOption(pluginOptionString) {
-    return TranslatorUtils.substringAfterChar(pluginOptionString, '/');
-  }
-
-  static isPluginRule(ruleName) {
-    if (ruleName.includes('@') && ruleName.includes('/')) {
-      return true;
-    }
-    return false;
-  }
-
   // 변수들이 존재하는 원본 에러 메세지로부터 변수들을 추출하는 유틸 -> 한글로 변환할 때 그대로 사용하기 위함
   static extractVariablesFromMessage(message) {
     if (message.ruleId === 'max-lines-per-function') {
