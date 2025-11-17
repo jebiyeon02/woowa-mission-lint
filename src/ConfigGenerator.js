@@ -34,11 +34,10 @@ class ConfigGenerator {
     const finalOverrideConfig = [
       eslintConfigPrettier,
       // 전체 파일에 다 적용되는 일반 설정들
-      {
-        files: ['**/*.js'],
-        ignores: [...specificFolders, ...exceptFolders],
-        languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-        plugins: {
+      this.#createOverrideConfig(
+        ['**/*.js'],
+        [...specificFolders, ...exceptFolders],
+        {
           '@stylistic': stylisticPlugin,
           prettier: eslintPluginPrettier,
           woowa: {
@@ -47,37 +46,45 @@ class ConfigGenerator {
             },
           },
         },
-        rules: {
-          ...generalRules,
-          'prettier/prettier': 'error',
-        },
-      },
+        generalRules,
+      ),
       // 나중에 확장하게 된다면, config를 더 많이 만들어야 할 수도 있다. 이 점 기억해두자
     ];
     // 특정 폴더 전용 설정들 (특정 폴더 옵션이 있는 경우에만 생성함)
     if (specificFolders.length > 0) {
-      finalOverrideConfig.unshift({
+      finalOverrideConfig.unshift(
         // (prettier-config 앞으로 끼워넣기)
-        files: specificFolders,
-        ignores: [...exceptFolders],
-        languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-        plugins: {
-          '@stylistic': stylisticPlugin,
-          prettier: eslintPluginPrettier,
-          woowa: {
-            rules: {
-              'constant-snake-case': constantSnakeCaseRule,
+        this.#createOverrideConfig(
+          specificFolders,
+          [...exceptFolders],
+          {
+            '@stylistic': stylisticPlugin,
+            prettier: eslintPluginPrettier,
+            woowa: {
+              rules: {
+                'constant-snake-case': constantSnakeCaseRule,
+              },
             },
           },
-        },
-        rules: {
-          ...specificFolderRules,
-          'prettier/prettier': 'error',
-        },
-      });
+          specificFolderRules,
+        ),
+      );
     }
 
     return finalOverrideConfig;
+  }
+
+  #createOverrideConfig(files, ignores, plugins, rules) {
+    return {
+      files,
+      ignores,
+      languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+      plugins,
+      rules: {
+        ...rules,
+        'prettier/prettier': 'error',
+      },
+    };
   }
 
   #makeEslintRules(koreanRules) {
