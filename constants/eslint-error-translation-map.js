@@ -8,7 +8,7 @@ export const ESLINT_ERROR_TRANSLATION_MAP = {
     },
   ],
   'no-ternary': [{ noTernaryOperator: '삼항연산자는 사용할 수 없습니다.' }],
-  'lines-between-class-members': [
+  '@stylistic/lines-between-class-members': [
     { always: '클래스 내부 메서드 사이에 공백이 필요합니다.' },
   ],
   'max-depth': [
