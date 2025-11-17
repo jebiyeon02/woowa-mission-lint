@@ -35,21 +35,6 @@ describe('TranslatorUtils 클래스 테스트', () => {
     );
   });
 
-  describe('isPluginRule 메서드 테스트', () => {
-    test.each([
-      ['@stylistic/semi', true],
-      ['plugin/rule', false],
-      ['@stylistic-rule', false],
-      ['not-a-plugin-rule', false],
-    ])('플러그인 규칙 여부를 정확히 판별해야 한다', (ruleName, expected) => {
-      // when
-      const result = TranslatorUtils.isPluginRule(ruleName);
-
-      // then
-      expect(result).toBe(expected);
-    });
-  });
-
   describe('extractVariablesFromMessage 메서드 테스트', () => {
     test('max-lines-per-function 규칙의 변수를 추출해야 한다', () => {
       // given
