@@ -11,8 +11,12 @@ const constantSnakeCaseRule = {
   create(context) {
     return {
       VariableDeclarator(node) {
-        if (node.parent?.kind !== 'const') return;
-        if (node.id.type !== 'Identifier') return;
+        if (node.parent?.kind !== 'const') {
+          return;
+        }
+        if (node.id.type !== 'Identifier') {
+          return;
+        }
 
         const name = node.id.name;
         const regex = new RegExp(CONFIG_CONSTANTS.CAPITAL_SNAKE_CASE_REGEX);

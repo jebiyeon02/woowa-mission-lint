@@ -13,7 +13,9 @@ const lowerCamelCaseRule = {
   create(context) {
     return {
       VariableDeclarator(node) {
-        if (node.id.type !== 'Identifier') return;
+        if (node.id.type !== 'Identifier') {
+          return;
+        }
 
         const name = node.id.name;
 
