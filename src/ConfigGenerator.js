@@ -1,10 +1,10 @@
+import stylisticPlugin from '@stylistic/eslint-plugin';
 import { RULE_MAP } from '../constants/rule-map.js';
 import { RULE_STATE } from '../constants/rule-state.js';
 import constantSnakeCaseRule from '../rules/constantSnakeCaseRule.js';
 import RuleTranslator from './RuleTranslator.js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
-import TranslatorUtils from '../utils/TranslatorUtils.js';
 import lowerCamelCaseRule from '../rules/lowerCamelCaseRule.js';
 import ConfigReader from './ConfigReader.js';
 import { CONFIG_CONSTANTS } from '../constants/config-constants.js';
@@ -39,6 +39,7 @@ class ConfigGenerator {
         ignores: [...specificFolders, ...exceptFolders],
         languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
         plugins: {
+          '@stylistic': stylisticPlugin,
           prettier: eslintPluginPrettier,
           woowa: {
             rules: {
@@ -61,6 +62,7 @@ class ConfigGenerator {
         ignores: [...exceptFolders],
         languageOptions: { ecmaVersion: 'latest', sourceType: 'module' },
         plugins: {
+          '@stylistic': stylisticPlugin,
           prettier: eslintPluginPrettier,
           woowa: {
             rules: {
@@ -84,9 +86,6 @@ class ConfigGenerator {
     Object.entries(koreanRules).forEach((koreanRule) => {
       let { ruleNameEslint, ruleOptionEslint } =
         this.#translator.translate(koreanRule);
-      if (TranslatorUtils.isPluginRule(ruleNameEslint)) {
-        ruleNameEslint = TranslatorUtils.extractRuleOption(ruleNameEslint);
-      }
       eslintRules[ruleNameEslint] = ruleOptionEslint;
     });
 
