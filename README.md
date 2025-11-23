@@ -1,4 +1,6 @@
 [![npm version](https://img.shields.io/npm/v/woowa-mission-lint?style=flat&color=blue)](https://www.npmjs.com/package/woowa-mission-lint)
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+![MIT License](https://img.shields.io/badge/license-MIT-red.svg)
 
 # woowa-mission-lint
 
