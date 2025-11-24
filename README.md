@@ -20,6 +20,9 @@
 **프리코스를 진행하며 요구사항을 검증할 때 겪으셨던 어려움을 제가 해결해 드릴게요** 😊
 <br><br>
 
+## 데모 영상
+![Image](https://github.com/user-attachments/assets/5aa52cf3-d2ee-46de-8084-68b33c7ab9b0)
+
 ## 사용하기
 
 1. 모듈 다운로드
